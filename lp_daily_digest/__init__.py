@@ -15,10 +15,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from flask import Flask, render_template, jsonify
+from lp_daily_digest.config import Config
 import datetime
+import requests
 
 app = Flask(__name__)
-from_name = "Daily Digest"
+app.config.from_object(Config)
 
 @app.route('/')
 def index():
@@ -38,3 +40,12 @@ def preview():
 @app.route('/json/')
 def json():
     return jsonify(html=render_template('output.html'))
+
+# Print!
+@app.route('/print/')
+def send_print():
+    r = requests.post(
+        "%s?from=%s" % (app.config['PRINT_KEY'], app.config['FROM_NAME']),
+        json={"html": render_template('output.html')}
+    )
+    return jsonify(r.json())
