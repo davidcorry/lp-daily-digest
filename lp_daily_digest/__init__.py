@@ -16,11 +16,16 @@
 
 from flask import Flask, render_template, jsonify
 from lp_daily_digest.config import Config
+from lp_daily_digest.modules.HelloWorld import HelloWorld
 import datetime
 import requests
 
 app = Flask(__name__)
 app.config.from_object(Config)
+
+modules = [
+    HelloWorld()
+]
 
 @app.route('/')
 def index():
@@ -33,19 +38,20 @@ def preview():
         'output.html',
         preview=True,
         date=datetime.datetime.now(),
-        from_name=from_name
+        modules=modules,
+        from_name=app.config['FROM_NAME']
     )
 
 # Output the JSON that you would send to the Sirius server.
 @app.route('/json/')
 def json():
-    return jsonify(html=render_template('output.html'))
+    return jsonify(html=render_template('output.html', modules=modules))
 
 # Print!
 @app.route('/print/')
 def send_print():
     r = requests.post(
         "%s?from=%s" % (app.config['PRINT_KEY'], app.config['FROM_NAME']),
-        json={"html": render_template('output.html')}
+        json={"html": render_template('output.html', modules=modules)}
     )
     return jsonify(r.json())
