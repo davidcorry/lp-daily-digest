@@ -1,0 +1,62 @@
+{% if preview %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="/static/fonts/DejaVuSans.css" rel="stylesheet">
+    <style>
+        /* Overrides for our preview */
+        html {
+            width: 384px;
+            margin: 3px !important;
+            outline: 1px solid black;
+        }
+        
+        /* Styling from Sirius's default template:
+           https://github.com/nordprojects/sirius/blob/master/sirius/coding/default_template.html
+           The single change is the font, which, despite the HTML saying Helvetica and Arial,
+           it looks like the Heroku server that Sirius is installed on uses DejaVu Sans as the
+           default sans-serif font. */
+        html, body {
+            margin: 0;
+            overflow-x: hidden;
+            word-wrap: break-word;
+        }
+        
+        body {
+            margin-top: 1px;
+            margin-bottom: 80px;
+            border: 1px;
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 30px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+          margin-bottom: 20px;
+        }
+        li {
+          margin-bottom: 0.5em;
+        }
+        .header {
+          font-weight: 800;
+          text-transform: uppercase;
+          font-size: 18px;
+          margin-bottom: 18px;
+          text-align: center;
+        }
+        img {
+          max-width: 100%;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="header">
+      {{ date.strftime('%H:%M | %d-%b-%Y') }}{% if from_name %} | {{ from_name }}{% endif %}
+    </div>
+{% endif %}
+    <div>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+{% if preview %}
+</body>
+</html>
+{% endif %}

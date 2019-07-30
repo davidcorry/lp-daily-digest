@@ -14,10 +14,27 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from flask import Flask
+from flask import Flask, render_template, jsonify
+import datetime
 
 app = Flask(__name__)
+from_name = "Daily Digest"
 
 @app.route('/')
 def index():
     return 'Hello.'
+
+# A preview of the HTML output that gets sent to the Little Printer.
+@app.route('/preview/')
+def preview():
+    return render_template(
+        'output.html',
+        preview=True,
+        date=datetime.datetime.now(),
+        from_name=from_name
+    )
+
+# Output the JSON that you would send to the Sirius server.
+@app.route('/json/')
+def json():
+    return jsonify(html=render_template('output.html'))
