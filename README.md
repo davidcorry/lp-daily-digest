@@ -2,9 +2,13 @@
 
 The goal of this project is to recreate Little Printer's daily printout, something that combines info from a few different sources and automatically sends it to a Little Printer connected to [Nord's Sirius server][nord-sirius]. The initial work on this will be for personal use (i.e. single user, no custom config), but ideally this will expand to allow multiple users and a customizable output.
 
-Right now, the modules I'd like to include are:
+Right now, I've written these modules (found in [lp\_daily\_digest/modules/](lp_daily_digest/modules/)):
 
-* News headlines (via the [NYT API][]?)
+* A simple "Hello World" module as a template and example
+* News headlines (via the [NYT API][]) - pulls the 5 top stories
+
+I'd like to also include:
+
 * Weather info (via [Dark Sky][]?)
 * Some kind of tiny puzzle
 
