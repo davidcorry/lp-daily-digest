@@ -15,7 +15,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from lp_daily_digest.modules import Module
-import os
 
 class HelloWorld(Module):
     def render(self):

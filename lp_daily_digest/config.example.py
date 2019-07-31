@@ -17,3 +17,4 @@
 class Config(object):
     PRINT_KEY = 'https://device.li/abcdefg' # Replace this with your own Print Key.
     FROM_NAME = 'Daily Digest' # The name that goes at the header.
+    NYT_API_KEY = 'abcdefg' # Replace this with your own NYT API key.
