@@ -15,6 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Config(object):
+    APPLICATION_ROOT = '' # If your instance is running in a subdirectory, add it here. (e.g. '/lp-daily-digest')
     PRINT_KEY = 'https://device.li/abcdefg' # Replace this with your own Print Key.
     FROM_NAME = 'Daily Digest' # The name that goes at the header.
     NYT_API_KEY = 'abcdefg' # Replace this with your own NYT API key.
