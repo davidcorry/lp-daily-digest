@@ -37,7 +37,7 @@ def black_and_white(url, width=384):
     # Perceived brightness algorithm from https://alienryderflex.com/hsp.html
     stat = ImageStat.Stat(img)
     r,g,b = stat.mean
-    brightness = math.sqrt(.299*(r**2) + 0.587*(g**2) + 0.114*(b**2))
+    brightness = math.sqrt(0.299*(r**2) + 0.587*(g**2) + 0.114*(b**2))
 
     # Adjust brightness accordingly. I'm not really sure if this is a reasonable
     # way to adjust brightness, so it'll be a bit of trial and error. This just
