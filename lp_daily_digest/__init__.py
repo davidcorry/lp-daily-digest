@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from lp_daily_digest.config import Config
 from lp_daily_digest.modules.NYTHeadlines import NYTHeadlines
 import datetime
@@ -48,10 +48,13 @@ def json():
     return jsonify(html=render_template('output.html', modules=modules))
 
 # Print!
-@app.route('/print/')
-def send_print():
-    r = requests.post(
-        "%s?from=%s" % (app.config['PRINT_KEY'], app.config['FROM_NAME']),
-        json={"html": render_template('output.html', modules=modules)}
-    )
-    return jsonify(r.json())
+@app.route('/print/', methods=['GET', 'POST'])
+def print():
+    if request.method == 'POST':
+        r = requests.post(
+            "%s?from=%s" % (app.config['PRINT_KEY'], app.config['FROM_NAME']),
+            json={"html": render_template('output.html', modules=modules)}
+        )
+        return jsonify(r.json())
+    else:
+        return render_template('print.html')
