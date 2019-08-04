@@ -49,7 +49,7 @@ def json():
 
 # Print!
 @app.route('/print/', methods=['GET', 'POST'])
-def print():
+def lp_print():
     if request.method == 'POST':
         r = requests.post(
             "%s?from=%s" % (app.config['PRINT_KEY'], app.config['FROM_NAME']),
