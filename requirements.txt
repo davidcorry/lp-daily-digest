@@ -7,6 +7,7 @@ idna==2.8
 itsdangerous==1.1.0
 Jinja2==2.10.1
 MarkupSafe==1.1.1
+memoization==0.1.4
 Pillow==6.1.0
 pydarksky==2.0.1
 Pyphen==0.9.5

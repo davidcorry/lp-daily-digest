@@ -16,18 +16,22 @@
 
 from lp_daily_digest.modules import Module
 from flask import current_app as app
+from memoization import cached
 import requests
 
 class NYTHeadlines(Module):
-    def render(self):
+    @cached(ttl=3600)
+    def get_headlines(self):
         r = requests.get(
             'https://api.nytimes.com/svc/topstories/v2/home.json',
             params={'api-key': app.config['NYT_API_KEY']}
         )
 
         results = r.json()['results'][:5]
-        headlines = self.simplify_results(results)
+        return self.simplify_results(results)
 
+    def render(self):
+        headlines = self.get_headlines()
         return self.render_template('headlines.html', headlines=headlines)
 
     def simplify_results(self, results):
@@ -50,6 +54,7 @@ class NYTHeadlines(Module):
         return headlines
 
     def get_filters(self):
+        @cached(max_size=10)
         def black_and_white(url, width=384):
             from PIL import Image, ImageEnhance, ImageStat
             import math

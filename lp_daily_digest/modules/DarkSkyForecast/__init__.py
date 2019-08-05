@@ -18,9 +18,11 @@ from lp_daily_digest.modules import Module
 from pydarksky.darksky import DarkSky
 from flask import current_app as app
 from datetime import datetime
+from memoization import cached
 
 class DarkSkyForecast(Module):
-    def render(self):
+    @cached(ttl=3600)
+    def get_weather(self):
         darksky = DarkSky(app.config['DARK_SKY_API_KEY'])
 
         # Set the info we want (or, rather, exclude it and invert the exclusion)
@@ -43,6 +45,11 @@ class DarkSkyForecast(Module):
             weather.hourly[18],
             weather.hourly[21]
         ]
+
+        return today, hourly
+
+    def render(self):
+        today, hourly = self.get_weather()
         return self.render_template('darksky.html', today=today, hourly=hourly)
 
     def get_filters(self):
