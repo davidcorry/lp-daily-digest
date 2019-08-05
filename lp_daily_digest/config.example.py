@@ -16,6 +16,8 @@
 
 class Config(object):
     APPLICATION_ROOT = '' # If your instance is running in a subdirectory, add it here. (e.g. '/lp-daily-digest')
+    SECRET_KEY = '' # This is Flask's secret key to create sessions. For advice on how to create one, see:
+                    # https://flask.palletsprojects.com/en/1.1.x/quickstart/#sessions
     PRINT_KEY = 'https://device.li/abcdefg' # Replace this with your own Print Key.
     FROM_NAME = 'Daily Digest' # The name that goes at the header.
     NYT_API_KEY = 'abcdefg' # Replace this with your own NYT API key.

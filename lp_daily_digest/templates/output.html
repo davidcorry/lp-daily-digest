@@ -23,10 +23,12 @@
     <meta name="viewport" content="width=390px">
     <style>
         /* Overrides for our preview */
-        html {
+        #preview {
             width: 384px;
-            margin: 3px !important;
+            margin: 3px auto;
             outline: 1px solid black;
+            padding-bottom: 80px;
+            padding-top: 1px;
         }
 
         /* Styling from Sirius's default template:
@@ -63,18 +65,57 @@
         img {
           max-width: 100%;
         }
-
+        #flashes {
+            background-color: #ddd;
+            font-size: 20px;
+        }
+        #print-button, #flashes {
+            width: 384px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        #print-button input {
+            margin: 0;
+            font-size: 2em;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <div class="header">
-      {{ date.strftime('%H:%M | %d-%b-%Y') }}{% if from_name %} | {{ from_name }}{% endif %}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div id="flashes">
+        {% for message in messages %}
+          {{ message }}
+        {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <div id="print-button">
+        <form action="{{ url_for('lp_print') }}" method="post" accept-charset="utf-8">
+            <input type="hidden" name="preview" value="true" id="preview" />
+            <input type="submit" value="Print &rarr;" />
+        </form>
     </div>
+    <div id="preview">
+        <div class="header">
+          {{ date.strftime('%H:%M | %d-%b-%Y') }}{% if from_name %} | {{ from_name }}{% endif %}
+        </div>
 {% endif %}
-{% for module in modules %}
-{{ module.render()|safe }}
-{% endfor %}
+        <style>
+            .divider {
+                margin: 15px 0;
+                border-bottom: 5px double black;
+            }
+        </style>
+        {% for module in modules %}
+            {{ module.render()|safe }}
+            {% if not loop.last %}
+            <div class="divider"></div>
+            {% endif %}
+        {% endfor %}
 {% if preview %}
+    </div>
 </body>
 </html>
 {% endif %}

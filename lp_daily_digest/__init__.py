@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, flash, redirect, url_for
 from lp_daily_digest.config import Config
 from lp_daily_digest.modules.NYTHeadlines import NYTHeadlines
 import datetime
@@ -55,6 +55,13 @@ def lp_print():
             "%s?from=%s" % (app.config['PRINT_KEY'], app.config['FROM_NAME']),
             json={"html": render_template('output.html', modules=modules)}
         )
+        if request.form['preview'] == 'true':
+            status = r.json()['status']
+            if status == 'sent':
+                flash('Printed.')
+            else:
+                flash('Submitted a print, but got this response: %s' % status)
+            return redirect(url_for('preview'))
         return jsonify(r.json())
     else:
         return render_template('print.html')
