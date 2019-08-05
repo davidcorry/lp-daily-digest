@@ -20,6 +20,10 @@ from lp_daily_digest.modules.NYTHeadlines import NYTHeadlines
 from lp_daily_digest.modules.DarkSkyForecast import DarkSkyForecast
 import datetime
 import requests
+from apscheduler.schedulers.background import BackgroundScheduler
+
+scheduler = BackgroundScheduler()
+scheduler.start()
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -49,15 +53,25 @@ def preview():
 def json():
     return jsonify(html=render_template('output.html', modules=modules))
 
-# Print!
-@app.route('/print/', methods=['GET', 'POST'])
-def lp_print():
-    if request.method == 'POST':
+def submit_print():
+    try: app
+    except:
+        app = Flask(__name__)
+        app.config.from_object(Config)
+
+    with app.app_context():
         r = requests.post(
             "%s?from=%s" % (app.config['PRINT_KEY'], app.config['FROM_NAME']),
             json={"html": render_template('output.html', modules=modules)}
         )
+    return r
+
+# Print!
+@app.route('/print/', methods=['GET', 'POST'])
+def lp_print():
+    if request.method == 'POST':
         if request.form['preview'] == 'true':
+            r = submit_print()
             status = r.json()['status']
             if status == 'sent':
                 flash('Printed.')
@@ -67,3 +81,6 @@ def lp_print():
         return jsonify(r.json())
     else:
         return render_template('print.html')
+
+if app.config['ENV'] == 'production':
+    scheduler.add_job(submit_print, trigger='cron', hour='9', minute='30')
