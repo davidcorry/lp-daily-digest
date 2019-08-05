@@ -17,6 +17,7 @@
 from flask import Flask, render_template, jsonify, request, flash, redirect, url_for
 from lp_daily_digest.config import Config
 from lp_daily_digest.modules.NYTHeadlines import NYTHeadlines
+from lp_daily_digest.modules.DarkSkyForecast import DarkSkyForecast
 import datetime
 import requests
 
@@ -24,6 +25,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 modules = [
+    DarkSkyForecast(),
     NYTHeadlines()
 ]
 

@@ -1,0 +1,225 @@
+{# lp-daily-digest
+ # Copyright (C) 2019 David Corry
+ #
+ # This program is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # (at your option) any later version.
+ #
+ # This program is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ #}
+<style>
+    .darkskyicon {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4QAAACWAQMAAAC8dtR1AAAABlBMVEX///8AAABVwtN+AAAL4UlEQVR4XuXaTW7kuBUAYBIMmhtjuJ3FwMwxemGYOcrssp1lLQotBVnkCtnlIgOEwRwgV1AjF+BuuCD4Ij4+ka9Eq21DFQ8wERrddsnWJ/H9kJJarJsXH7zJ5bcU7fLRIqQBmG6AH+8sKsh7UMHCgXBnUQPM5R92XANxFGW8l2gWVxLX5U44yKOoz4jSCy82086m8ABzDyPAKNpT4sIi+SxUEEICix2IaR5El86IK6E24IoRUsmEtjsJ61vZfBY/yvLd9HRCFCuhff86C6EXFZFTvlyzXlrZrJAq4vWUeBXCzD1KUyjf4vGLpfCPUDWaz3R28fmM+LSKlPAyYIisEF+qGAogwW9lY/HsdA72jPi9SZ8w4WsGWShX4vCqVRR6XsUgTMCyMfjHQbDzGdJBgS2JBuan1U01rj+ZGWNoZ4zmJxW/KwWzmOWMOOGAuUg5a/21uCheUhlwyMJh2dTPJUDQ+YwIgAkfKQ+1v5R251HMptbkF2psFmahkorqjCgjDli6kKiWS+vfly+YIm6+rqzHCPiST0mcEVXAAYtXEuUSsTAkAET7WETjYx0ESHop6ftFPJ8Rl1IUMjxvYgj4ty6iQVH7WjYKolxKfTjxeELUXmCauhtRRAMAoYqqiDYLA0mEUpQ2nRJnUQK32Jn6K4kWABbbm69wwn7NVTTwfF70Jt+IF4cLADaFmtmt6gVbHZyYPL4U0c7K6yzk8iAeSLyWq9CZidpfhZ0vz6WdQzxRjUV0Xnm1iuFRPJL49FSQxETlozDzZcId9xAFiTJEFPEaMX8A/lXFIHSuogx3GNUSn4jiBUWHiEXxaxHl+reC+FxEEe+Qq0W8Pj48quWKIuaq2IkSokDxelLESD0V8fFRr6JacaxHQaMaUPRCQKji0/kOEMppP62i8c/lLK4aoGckiv9ZRRlJPN3lRCzuDw+PD2Z2eN3yRVE08XQnT3IVH8SjMMLOf/67QOyyibGJVxLPz1aTXt0/rOJ3wvhff5bhRrw28YnE8zOyg+Ku4oPQHpLiYl1pqV88/sAziudXHRZd8YBVCEmjHylXfSlOTeIjiudXVhrYrcg1muKrSPVYJhZh/lpFi+L51aNMeIl4kf4zruGEDiTi2s3JBUXcdT27QqaNxuxPl4uhNTmNqgaAXEValZ+/C+CiSOk7uu+gTQFAkqGKCzaC83c6XBwnXGwHAQOoVk2F83dzJD6g+OvPe9GWGoooSozs+TtWEh9RXHvOQQBKiU5Q+PN35VzU84uiqwF0ADDf63nO2slvRcrVNrQQ8LMs7iXSylex+LGomf7lvUUxiK1G/P9apFHtNSLuLT78Pp92Ci9+gy18NCjjR4sq/f+KsHywaCB/sDi9qampcAxc3ydKAAivi986rfw+UQNAehXUAPFeooW3dG4LkN8oOv+K6IBP9urgSvCH3iQqWF4R+9R4HK5xnXUsmtdEuXI9ddRBuHQR45tEt4l/IvGPHSMjCd0YexBTU8T0JnEiUQYS43D2S18r8yXjmF75LaIEElWkx/JpOPuZvVA6CtcEQQO8RVRNLNKPL8TSQvmLRHUULoCizm8Q9SbqLNi/XEzstlIfhEuWDw34N4hmExXQB/vjuYh752+GS0G4KbQpdGFGUS0t4hbFfswm8l+W4FtmA7wk+vJDm2NYSK3HTq63fS5Z/LIfM+5FjDOJ06pZHi66BdT42RR7m/K7d9KmidEQTvGcAtPIQiqimFbjJly2vQBhbwd5etnQ/iHAREEUg7k401kjj+8lFy6iYjOPiOLpZavtmrig2D/a55tsokcMWSY6ZpnMGtAmmkQQHQ28TjdXjwD7QgJlWM3GeR9qBz36msJnaSLh5bbtCTBvBWgW3DkRqElUeRMxhKgzkfLIBd7mJ96ZFLChwotX0JLOgW9vaRwXt9tTnYeSteDbmCmqVYDZtqGXJKJOIh16luUUfyARNjFtImzWTQM1TJR1MCUk/pqgink7Smapp1k7kZuoU2tvcxcXXj2fW76VwaTeM7WB+ILhTzXoSODZ9OsgfS8uFjxFUAEk3iGmmYmBCtbl/jSsDPFlC3BmLd+xuc80MVYRz9yGbfC66BZYtsSeAGIRWaVUKPWlCRQo0Q6WYZZwEqk3uCbOTbRfIcguJsSIFQ2itK1lYyH32TbsO6OJrKW7pYWLi1FC+61M7YASkqD6jYaI9WBIlACmxXTK0150kYmBi6mJHlt9bAXYss5TXuMiRpOoILD1THRcpMKffAsXi2MXPwsDM409RYg//7FQpzTZRM+6/+L4LIN2auLfIPFczSoTj3nqFp4uOln4S42WyzSlTVXU0DNMgh9EvYo1Nj/Rr9BPWhLpWzovBzC3AXGxdV+XaKopGqokzjbsxUwizU4G6uYVdFHA0kVPaRNobpkCMYrEVPa39mvjTlSZyo7Gw5E4Sy5OW3FaAASgyDq3uVc3EQnZ+7dJRyLl/jSINM3Cli+R2spMBF10a9Y4jEzMu1yVTJTFoU2IW1E2MbVFvIRWMBLAay76LUs07EUQwPo3itSZBd+6mItSixfYTAmJREzOiYnzN8TJKxITElyk1PcO+iIexbz1DxNHMW7rXX0kahLDkYjnrGHBtjLNTZwA/kFiwXqnkZBvRcFFt2zivL9xULnXJvYgm6uo0yZCqDaKS4tejbxOB2LbYWEnph5s1LCUuuiq6PImavBVnEisT14vKM59pd0C7AaR1aaLtZTcbKKJTVzK4TfRwFKr0KGoUn02lHZiIJHObBCpNh0VgPMuk2irCKs413OHUEVbxYyhlFnInRiaGA9EG+qSa0IR6DfsivkiziTaTdSjOL0shgNxJYCSw/lpE3/ANe5LokRRwoui4aO6COhbYGKscbAQimhDX30Po4qHm6o4byIm1yg68JKJsYs6SqBsdt51UcI8Zk5sa+8mqluxV0cWiomJi21h/E/vsl1Y2YzV0UoR/IHYOoA4FJPKbXltYhcnP3QAjWKsRUWiTmUvbbaJ4VhUqJMoBBOXocvh5ZkqhlUMo7gpaRAzEyPKe9EtrJMPoos6yihxisbYf6pim632omSiflm0YRDxPG0TVTmMjfUTW3OazcjiJldHUaYJxCASDFwMuHcTHYmO4g0sdZgYJDAxoOj1bRxNGFcd0G58zSZCECYx0TGRb1zcGpMcRLayYjVKU7IqbSRJwNt2Eqelrx53ohhEGjsbmhiH1aPEXouiinJZxUv5SEMTN0eOIsyjOC1c1HG/QkaNjiVjbc5FVDCTSA4di238bDSJlJaGicNdgJhie9px2cQZ1av7ZeF3Tu4bYjQLy04ujnc6UxaWxM+bWNRFgPt34HeHdhDdMoiomdjF8W7OwVegmH5PYtkFUQJAxIAei2FjjsXxjtWy56gk4gRGos3fEG1sTBXJ0Ewc78oNdUwmliM7EqcuumXXAYRNbKHARTZVj08eNB74RvR4+ijKmzvWXZfr6ee6qIqYuzg+XZFMpxGlH4UAQbKzAb/r5MJAO5kbUXUxjE+QBOm0scGZlmmR0NvHIPZHvuD1jQh7UfNkcV2nFTJdrPVuZg917Sgq2it3Yi9iG8YngezFEa2QKxCF9s/0uyTOe3GLssYlEhd9E8ennbyP0aqjtgMS2ViIvSgAZtrFRWrUlN/8iS7bRlHUUU1dzGKfq+1+PQuVuDj1vj4+tT4WMXMCfzK/r0dhSUx7MbbxG5/MH4tYHXMXCeebaZerMu8yjnwJfnj7cCxiB+A7/Siqfvt8I1rY9s9EEfwu8fAVLz3j4KIBX3kY3iKdFLcl0NzTwgSUAlXU8KZsEMP7RNPWzpNnogJEJOTjt4EkythEnJFfE+mNB1uT2IUXUTp+40miSl3EVcebNxd4zfeaHd/qHovC+TdqPEiTZ/GFMLy5fpc4dAC+mcxr3pLoj97O01ZXyIfi0OX4psGzvGT3nPx/IAxiXSEfivtOvtsTqR7YmfEF1KCxHe8XySCkBzK8U7TzO0RBYuInML9T/CTeI04vRfedoniXSOkZ7ike5ypLT39XcazH8WTEfcXX55F3H1jGD/9/j+HDRfG7EWX8Pf+v4P8CYXSzdnsDd4IAAAAASUVORK5CYII=);
+        /* (Sorry for the long Data URI.) }{ */
+        image-rendering: pixelated;
+        background-color: #ccc;
+        background-position: 999px 999px;
+        background-repeat: no-repeat;
+    }
+    .darkskyicon-clear-day {
+        background-position: 0 0;
+    }
+    .darkskyicon-clear-night {
+        background-position: -50px 0;
+    }
+    .darkskyicon-rain {
+        background-position: -100px 0;
+    }
+    .darkskyicon-snow, .darkskyicon-sleet {
+        background-position: -150px 0;
+    }
+    .darkskyicon-wind {
+        background-position: -200px 0;
+    }
+    .darkskyicon-fog {
+        background-position: -250px 0;
+    }
+    .darkskyicon-cloudy {
+        background-position: -300px 0;
+    }
+    .darkskyicon-partly-cloudy-day {
+        background-position: -350px 0;
+    }
+    .darkskyicon-partly-cloudy-night {
+        background-position: -400px 0;
+    }
+    .darkskyiconbig-clear-day {
+        background-position: 0px -50px;
+    }
+    .darkskyiconbig-clear-night {
+        background-position: -100px -50px;
+    }
+    .darkskyiconbig-rain {
+        background-position: -200px -50px;
+    }
+    .darkskyiconbig-snow, .darkskyiconbig-sleet {
+        background-position: -300px -50px;
+    }
+    .darkskyiconbig-wind {
+        background-position: -400px -50px;
+    }
+    .darkskyiconbig-fog {
+        background-position: -500px -50px;
+    }
+    .darkskyiconbig-cloudy {
+        background-position: -600px -50px;
+    }
+    .darkskyiconbig-partly-cloudy-day {
+        background-position: -700px -50px;
+    }
+    .darkskyiconbig-partly-cloudy-night {
+        background-position: -800px -50px;
+    }
+    #darkskyday {
+        width: 100%;
+    }
+    #darkskyday, #darkskyday th, #darkskyday td {
+        border: none;
+        padding: 0px;
+    }
+    #darkskyday .darkskyicon {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+    }
+    #darkskydaysummary{
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    #darkskydayspecifics {
+        text-align: center;
+    }
+    #darkskydayspecifics div {
+        display: inline-block;
+        vertical-align: top;
+        font-size: 40px;
+    }
+    #darkskydayspecifics div > span {
+        display: block;
+        font-size: 17px;
+    }
+    #darkskydayspecifics .darkskyprecip {
+        line-height: 1.1em;
+    }
+    #darkskyday:after, #darkskyhourly:after, #darkskysun:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    .darkskyhour {
+        float: left;
+        width: 20%;
+        text-align: center;
+    }
+    .darkskyhourtime {
+        font-size: 20px;
+    }
+    .darkskyampm {
+        font-size: 0.85em;
+    }
+    #darkskyhourly {
+        border: solid black;
+        border-width: 1px 0;
+        padding: 10px 0;
+        margin-bottom: 5px;
+    }
+    #darkskyhourly .darkskyicon {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+    }
+
+    .darkskyhourtemp {
+        font-size: 25px;
+    }
+    .darkskyhouruv {
+        font-size: 20px;
+    }
+    .darkskyhouruv span {
+        font-size: 17px;
+    }
+    #darkskysun {
+        font-size: 15px;
+        padding: 0 15px;
+    }
+    #darkskysunrise {
+        float: left;
+    }
+    #darkskysunset {
+        float: right;
+    }
+    #darkskycredit {
+        padding-top: 3px;
+        font-size: 13px;
+        text-align: right;
+        font-style: oblique;
+    }
+</style>
+<div id="darksky">
+    <table id="darkskyday">
+        <tr>
+            <td>
+                <div class="darkskyicon darkskyiconbig-{{ today.icon }}"></div>
+            </td>
+            <td>
+                <div id="darkskydaysummary">
+                    {{ today.summary }}
+                </div>
+                <div id="darkskydayspecifics">
+                    <div>
+                        <span>Low</span>
+                        {{ today.temperatureMin|round|int }}&deg;
+                        <span>{{ today.temperatureMinTime|hour_format }}</span>
+                    </div>
+                    <div>
+                        <span>High</span>
+                        {{ today.temperatureMax|round|int }}&deg;
+                        <span>{{ today.temperatureMaxTime|hour_format }}</span>
+                    </div>
+                    {% if today|has_precipitation %}
+                        <div>
+                            <span>{{ today.precipType|capitalize }}</span>
+                            {% if today.precipType == 'snow' %}
+                                {{ today.precipAccumulation|round }}&Prime;
+                            {% else %}
+                                {% if today.precipIntensityMax < 0.05 %}
+                                    0&Prime;
+                                {% elif today.precipIntensityMax < 10 %}
+                                    {{ today.precipIntensityMax|round }}&Prime;
+                                {% else %}
+                                    {{ today.precipIntensityMax|round|int }}&Prime;
+                                {% endif %}
+                                <span class="darkskyprecip">{{ today.precipProbability|round }}%<br/><span class="darkskyampm">chance</span></span>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div id="darkskyhourly">
+        {% for hour in hourly %}
+        <div class="darkskyhour">
+            <div class="darkskyhourtime">{{ hour.time|hour_format }}</div>
+            <div class="darkskyicon darkskyicon-{{hour.icon}}"></div>
+            <div class="darkskyhourtemp">{{ hour.temperature|round|int }}&deg;</div>
+            <div class="darkskyhouruv"><span>UV:</span> {{ hour.uvIndex }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    <div id="darkskysun">
+        <div id="darkskysunrise">Sun rises at {{ today.sunriseTime|strftime('%-I:%M<span class="darkskyampm">%p</span>') }}</div>
+        <div id="darkskysunset">Sun sets at {{ today.sunsetTime|strftime('%-I:%M<span class="darkskyampm">%p</span>') }}</div>
+    </div>
+    <div id="darkskycredit">
+        Powered by Dark Sky.
+    </div>
+</div>

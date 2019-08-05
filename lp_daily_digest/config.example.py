@@ -21,3 +21,6 @@ class Config(object):
     PRINT_KEY = 'https://device.li/abcdefg' # Replace this with your own Print Key.
     FROM_NAME = 'Daily Digest' # The name that goes at the header.
     NYT_API_KEY = 'abcdefg' # Replace this with your own NYT API key.
+    DARK_SKY_API_KEY = 'abcdefg' # Replace this with your own Dark Sky API key.
+    DARK_SKY_LATITUDE = 0.0 # Latitude of the location you want to pull weather data for.
+    DARK_SKY_LONGITUDE = 0.0 # Longitude of the location you want to pull weather data for.
