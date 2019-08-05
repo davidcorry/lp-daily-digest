@@ -48,3 +48,45 @@ class NYTHeadlines(Module):
             headlines.append(headline)
 
         return headlines
+
+    def get_filters(self):
+        def black_and_white(url, width=384):
+            from PIL import Image, ImageEnhance, ImageStat
+            import math
+            import requests
+            from io import BytesIO
+            import base64
+
+            # Download the image
+            response = requests.get(url)
+            img = Image.open(BytesIO(response.content))
+
+            # Resize
+            img.thumbnail((width, 1000))
+
+            # Drop the contrast of the image a bit.
+            img = ImageEnhance.Contrast(img).enhance(0.95)
+
+            # Get the preceived brightness of the image so we can adjust accordingly.
+            # Perceived brightness algorithm from https://alienryderflex.com/hsp.html
+            stat = ImageStat.Stat(img)
+            r,g,b = stat.mean
+            brightness = math.sqrt(0.299*(r**2) + 0.587*(g**2) + 0.114*(b**2))
+
+            # Adjust brightness accordingly. I'm not really sure if this is a reasonable
+            # way to adjust brightness, so it'll be a bit of trial and error. This just
+            # pushes the overall percieved brightness closer to 128ish.
+            factor = 1/(brightness/256)/2
+            img = ImageEnhance.Brightness(img).enhance(factor)
+
+            # Convert to black and white.
+            img = img.convert('1')
+
+            # Convert the image to base64 text
+            img_buffer = BytesIO()
+            img.save(img_buffer, format='PNG')
+            img_base64 = base64.b64encode(img_buffer.getvalue())
+
+            return 'data:image/png;base64,%s' % img_base64.decode('utf-8')
+
+        return {'black_and_white': black_and_white}
