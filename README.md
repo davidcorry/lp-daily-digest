@@ -13,6 +13,15 @@ I'd like to also include:
 * Calendar info (with [icalevents][])
 * Some kind of tiny puzzle
 
+Searching Github brings up some old projects that could be ported or incorporated. So far I've found:
+
+* [Amazing][] maze generator
+* [On This Day][]
+* [Paper Pets][]
+* NASA [APOD][]
+* [Your Fortune][]
+* [Constellatio][]
+
 I'd like this to be as low-impact to my server as possible, and I'm going to try to structure this so that creating a new module is very simple and straightforward. It'll all have to be built-in modules, which means it'll be a less flexible than I remember the old Berg Cloud site to work, but that shouldn't be too big of a problem.
 
 I'll be using [Flask][] and [Jinja][] to create the HTML that gets sent to the printer, mostly for its simplicity and my own familiarity with it.
@@ -21,5 +30,11 @@ I'll be using [Flask][] and [Jinja][] to create the HTML that gets sent to the p
 [NYT API]: https://developer.nytimes.com/apis
 [Dark Sky]: https://darksky.net/dev
 [icalevents]: https://github.com/irgangla/icalevents
+[On This Day]: https://github.com/alfo/onthisday
+[Amazing]: https://github.com/knolleary/amazing
+[Paper Pets]: https://github.com/bfirsh/paperpets
+[APOD]: https://github.com/idleberg/Little-Printer-APOD
+[Your Fortune]: https://github.com/technowizard12/your_fortune_lp
+[Constellatio]: https://github.com/albyr/constellatio
 [Flask]: https://palletsprojects.com/p/flask/
 [Jinja]: https://palletsprojects.com/p/jinja/
