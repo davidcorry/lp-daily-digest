@@ -8,21 +8,24 @@ Right now, I've written these modules (found in [lp\_daily\_digest/modules/](lp_
 * News headlines (via the [NYT API][]) - pulls the 5 top stories
 * Weather info (via [Dark Sky][])
 
-I'd like to also include:
+Some goals for future modules:
 
 * Calendar info (with [icalevents][])
-* Some kind of tiny puzzle
+* Some kind of tiny puzzle - sudoku?
 
-Searching Github brings up some old projects that could be ported or incorporated. So far I've found:
+I've also working on incorporating old Little Printer projects. Right now, I've included:
 
 * [Amazing][] maze generator
+
+A Github search brings up more old projects that could be ported or incorporated. So far I've found:
+
 * [On This Day][]
 * [Paper Pets][]
 * NASA [APOD][]
 * [Your Fortune][]
 * [Constellatio][]
 
-I'd like this to be as low-impact to my server as possible, and I'm going to try to structure this so that creating a new module is very simple and straightforward. It'll all have to be built-in modules, which means it'll be a less flexible than I remember the old Berg Cloud site to work, but that shouldn't be too big of a problem.
+I'd like this to be as low-impact to my server as possible, and I'm going to try to structure this so that creating a new module is very simple and straightforward. It'll all have to be built-in modules for now, which means it'll be a less flexible than I remember the old Berg Cloud site to work. I have some ideas on how I can incorporate external modules, but it's super low on the priority list as long as I'm the only one using this.
 
 I'll be using [Flask][] and [Jinja][] to create the HTML that gets sent to the printer, mostly for its simplicity and my own familiarity with it.
 

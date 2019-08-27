@@ -18,6 +18,7 @@ from flask import Flask, render_template, jsonify, request, flash, redirect, url
 from lp_daily_digest.config import Config
 from lp_daily_digest.modules.NYTHeadlines import NYTHeadlines
 from lp_daily_digest.modules.DarkSkyForecast import DarkSkyForecast
+from lp_daily_digest.modules.Amazing import Amazing
 import datetime
 import requests
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -30,7 +31,8 @@ app.config.from_object(Config)
 
 modules = [
     DarkSkyForecast(),
-    NYTHeadlines()
+    NYTHeadlines(),
+    Amazing()
 ]
 
 @app.route('/')
