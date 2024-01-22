@@ -9,7 +9,7 @@ itsdangerous==1.1.0
 Jinja2==2.11.3
 MarkupSafe==1.1.1
 memoization==0.1.4
-Pillow==10.0.1
+Pillow==10.2.0
 pydarksky==2.0.1
 Pyphen==0.9.5
 pytz==2019.2
