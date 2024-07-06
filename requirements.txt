@@ -13,7 +13,7 @@ Pillow==10.3.0
 pydarksky==2.0.1
 Pyphen==0.9.5
 pytz==2019.2
-requests==2.31.0
+requests==2.32.2
 six==1.12.0
 tzlocal==2.0.0
 urllib3==1.26.19
