@@ -10,7 +10,6 @@ Jinja2==3.1.6
 MarkupSafe==3.0.4
 memoization==0.4.0
 Pillow==11.3.0
-pydarksky==2.0.1
 Pyphen==0.17.2
 pytz==2026.5
 requests==2.32.5

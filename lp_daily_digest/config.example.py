@@ -1,5 +1,5 @@
 # lp-daily-digest
-# Copyright (C) 2019 David Corry
+# Copyright (C) 2019-2026 David Corry
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,6 +21,5 @@ class Config(object):
     PRINT_KEY = 'https://device.li/abcdefg' # Replace this with your own Print Key.
     FROM_NAME = 'Daily Digest' # The name that goes at the header.
     NYT_API_KEY = 'abcdefg' # Replace this with your own NYT API key.
-    DARK_SKY_API_KEY = 'abcdefg' # Replace this with your own Dark Sky API key.
-    DARK_SKY_LATITUDE = 0.0 # Latitude of the location you want to pull weather data for.
-    DARK_SKY_LONGITUDE = 0.0 # Longitude of the location you want to pull weather data for.
+    OPEN_METEO_LATITUDE = 0.0 # Latitude of the location you want to pull weather data for.
+    OPEN_METEO_LONGITUDE = 0.0 # Longitude of the location you want to pull weather data for.

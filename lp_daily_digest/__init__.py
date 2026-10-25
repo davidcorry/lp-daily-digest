@@ -1,5 +1,5 @@
 # lp-daily-digest
-# Copyright (C) 2019 David Corry
+# Copyright (C) 2019-2026 David Corry
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 from flask import Flask, render_template, jsonify, request, flash, redirect, url_for
 from lp_daily_digest.config import Config
 from lp_daily_digest.modules.NYTHeadlines import NYTHeadlines
-from lp_daily_digest.modules.DarkSkyForecast import DarkSkyForecast
+from lp_daily_digest.modules.OpenMeteoForecast import OpenMeteoForecast
 from lp_daily_digest.modules.Amazing import Amazing
 import datetime
 import os
@@ -31,7 +31,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 modules = [
-    DarkSkyForecast(),
+    OpenMeteoForecast(),
     NYTHeadlines(),
     Amazing()
 ]

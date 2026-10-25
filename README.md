@@ -6,7 +6,7 @@ Right now, I've written these modules (found in [lp\_daily\_digest/modules/](lp_
 
 * A simple "Hello World" module as a template and example
 * News headlines (via the [NYT API][]) - pulls the 5 top stories
-* Weather info (via [Dark Sky][])
+* Weather info (via [Open-Meteo][]) - no API key needed
 
 Some goals for future modules:
 
@@ -31,7 +31,7 @@ I'll be using [Flask][] and [Jinja][] to create the HTML that gets sent to the p
 
 [nord-sirius]: http://littleprinter.nordprojects.co
 [NYT API]: https://developer.nytimes.com/apis
-[Dark Sky]: https://darksky.net/dev
+[Open-Meteo]: https://open-meteo.com
 [icalevents]: https://github.com/irgangla/icalevents
 [On This Day]: https://github.com/alfo/onthisday
 [Amazing]: https://github.com/knolleary/amazing
