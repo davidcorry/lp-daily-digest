@@ -12,7 +12,7 @@ memoization==0.4.0
 Pillow==13.0.0
 Pyphen==0.17.2
 pytz==2026.5
-requests==2.32.5
+requests==2.33.0
 six==1.17.0
 tzlocal==5.3.1
 urllib3==2.6.3
