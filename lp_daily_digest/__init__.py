@@ -20,6 +20,7 @@ from lp_daily_digest.modules.NYTHeadlines import NYTHeadlines
 from lp_daily_digest.modules.DarkSkyForecast import DarkSkyForecast
 from lp_daily_digest.modules.Amazing import Amazing
 import datetime
+import os
 import requests
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -84,5 +85,5 @@ def lp_print():
     else:
         return render_template('print.html')
 
-if app.config['ENV'] == 'production':
+if os.environ.get('FLASK_ENV', 'production') == 'production':
     scheduler.add_job(submit_print, trigger='cron', hour='9', minute='30')
